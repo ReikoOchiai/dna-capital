@@ -1,31 +1,50 @@
-# Build ThreeJS App
+# 🎋 Intro
 
-A boilerplate/starter project for quickly building three.js app using Vite & Three.
+Building clone of https://dnacapital.com/ with Three.js and glb
 
-## Quick Start:
+## 📦 Tech Stack
 
-**To create a project, simply run:**
+- TypeScript
+- Three.js
+- Vite
+- CSS
+- Deployed with Vercel
 
-```bash
-npx build-threejs-app
+## 👩🏽‍🍳 Features
+
+## ✨ Improvement
+
+## 💭 What I learnt
+
+### Loading with Draco loader
+
+Draco loader is library for compressing and decompressing 3D meshes
+Use Resources class to load the gltf or glb files
+
+1. Add assets into Asset file
+2. Declare geometry by `this.model = this.resources.items.gltfModel.dnaModel.scene` inside class that you want the geometry to be loaded
+
+### Type setting
+
+Type error TS5023 Details: error TS5023: Unknown compiler option 'allowImportingTsExtensions'. But project built fine, try following:
+
+1. Open the VS Code command palette with Ctrl + Shift + P (on Windows)
+2. Find "TypeScript: Select TypeScript Version…"
+3. Choose "Use Workspace Version"
+
+Sometimes VS code version is old compare to workspace version. Selecting workspace version fixed issue.
+
+## 🚦 Running the Project
+
 ```
-
-**Change directory:**
-
-```bash
-cd <project-name>
-```
-
-**Install the dependencies:**
-
-```bash
+# Install the dependencies
 npm install
-```
 
-**Run app in development:**
-
-```bash
+# Start development server
 npm run dev
+
+# Building static files
+npm run build
 ```
 
 ## Dependencies:
@@ -58,13 +77,3 @@ index.html
 main.ts
 style.css             # Custom styling
 ```
-
-## What I learnt:
-
-Type error TS5023 Details: error TS5023: Unknown compiler option 'allowImportingTsExtensions'. But project built fine, try following:
-
-1. Open the VS Code command palette with Ctrl + Shift + P (on Windows)
-2. Find "TypeScript: Select TypeScript Version…"
-3. Choose "Use Workspace Version"
-
-Sometimes VS code version is old compare to workspace version. Selecting workspace version fixed issue.
