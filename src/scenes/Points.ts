@@ -12,15 +12,11 @@ import vertexShader from '../shaders/vertex_particles_shader.glsl'
 import fragmentShader from '../shaders/fragment_shader.glsl'
 import Time from '../utils/Time.js'
 
-import ModelBaker from '../helpers/ModelBaker.js'
-// import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
-import { assets } from '../constants/assets.js'
-
 type Parameters = {
 	rotationSpeed: number
 	size: number
 }
-export default class Plane {
+export default class Points {
 	experience: Experience
 	scene: THREE.Scene
 	resources: Resources
@@ -28,18 +24,18 @@ export default class Plane {
 	material: THREE.ShaderMaterial
 	points: THREE.Points
 	parameters: Parameters
-	bakedModel: ModelBaker
+
 	time: Time
 	loader: GLTFLoader
 	model: THREE.Group
-
+	numbers: number
 	constructor() {
 		this.experience = new Experience()
 		this.scene = this.experience.scene
 		this.resources = this.experience.resources
 		this.time = this.experience.time
 		this.model = this.resources.items.gltfModel.dnaModel.scene
-		
+
 		this.parameters = {
 			rotationSpeed: 0.0005,
 			size: 1,
@@ -49,7 +45,6 @@ export default class Plane {
 	}
 
 	setModel() {
-
 		this.geometry = (this.model.children[0] as THREE.Mesh).geometry
 		this.geometry.center()
 		// this.geometry = new THREE.PlaneGeometry(1, 1, 10, 10)
@@ -61,13 +56,28 @@ export default class Plane {
 				uColor1: { value: new THREE.Color(0x612574) },
 				uColor2: { value: new THREE.Color(0x293583) },
 				uColor3: { value: new THREE.Color(0x1954ec) },
-
 				time: { value: 0 },
 				resolution: { value: new THREE.Vector4() },
 			},
 			wireframe: false,
 			side: THREE.DoubleSide,
 		})
+
+		this.numbers = this.geometry.attributes.position.array.length
+		let randoms = new Float32Array(this.numbers / 3)
+		let randomColors = new Float32Array(this.numbers / 3)
+
+		for (let i = 0; i < this.numbers / 3; i++) {
+			randoms.set([Math.random()], i)
+			randomColors.set([Math.random()], i)
+		}
+
+		this.geometry.setAttribute('randoms', new THREE.BufferAttribute(randoms, 1))
+		this.geometry.setAttribute(
+			'randomColors',
+			new THREE.BufferAttribute(randomColors, 1)
+		)
+		console.log(this.geometry.attributes)
 		this.points = new THREE.Points(this.geometry, this.material)
 		this.scene.add(this.points)
 	}
@@ -75,6 +85,6 @@ export default class Plane {
 	resize() {}
 
 	update() {
-		this.material.uniforms.time.value = this.time?.elapsed / 1000
+		this.material.uniforms.time.value = this.time?.elapsed / 100
 	}
 }

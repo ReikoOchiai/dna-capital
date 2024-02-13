@@ -39,7 +39,7 @@ export default class Renderer {
 		this.webglRenderer.shadowMap.type = THREE.PCFSoftShadowMap
 		this.webglRenderer.setSize(this.sizes.width, this.sizes.height)
 		this.webglRenderer.setPixelRatio(this.sizes.pixelRatio)
-		this.webglRenderer.setClearColor(0x1111111)
+		this.webglRenderer.setClearColor(0x11111111)
 	}
 
 	resize() {
