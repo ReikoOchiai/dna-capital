@@ -22,7 +22,7 @@ export default class Points {
 	resources: Resources
 	geometry: THREE.BufferGeometry
 	material: THREE.ShaderMaterial
-	points: THREE.Points
+	dnaModel: THREE.Points
 	parameters: Parameters
 
 	time: Time
@@ -61,6 +61,9 @@ export default class Points {
 			},
 			wireframe: false,
 			side: THREE.DoubleSide,
+			depthTest: false,
+			depthWrite: false,
+			blending: THREE.AdditiveBlending,
 		})
 
 		this.numbers = this.geometry.attributes.position.array.length
@@ -77,14 +80,19 @@ export default class Points {
 			'randomColors',
 			new THREE.BufferAttribute(randomColors, 1)
 		)
-		console.log(this.geometry.attributes)
-		this.points = new THREE.Points(this.geometry, this.material)
-		this.scene.add(this.points)
+
+		this.dnaModel = new THREE.Points(this.geometry, this.material)
+		this.scene.add(this.dnaModel)
+	}
+
+	animateGeometry() {
+		this.dnaModel.rotation.y = this.time.elapsed / 10000
 	}
 
 	resize() {}
 
 	update() {
 		this.material.uniforms.time.value = this.time?.elapsed / 100
+		this.animateGeometry()
 	}
 }
