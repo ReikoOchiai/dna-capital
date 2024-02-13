@@ -7,8 +7,8 @@ uniform vec3 uColor3;
 
 void main() {
 
-    float disc = 1.0 - smoothstep(-0.2, 0.5, length(gl_PointCoord - vec2(0.5)));
-
+    float alpha = 1.0 - smoothstep(-0.2, 0.5, length(gl_PointCoord - vec2(0.5)));
+    alpha *= 0.5;
     vec3 finalColor = uColor1;
     if(vRandomColors>0.33 && vRandomColors<0.66){
         finalColor = uColor2;
@@ -16,7 +16,9 @@ void main() {
     if(vRandomColors>0.66){
         finalColor = uColor3;
     }
-    gl_FragColor = vec4(finalColor, 1.0);
-    gl_FragColor = vec4(disc, 0.,0., 1.0);
+
+    float gradient = smoothstep(0.35, 0.5, vUv.y);
+    gl_FragColor = vec4(finalColor, alpha*gradient);
+    // gl_FragColor = vec4(alpha, 0.,0., alpha);
 
 }
