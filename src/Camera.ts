@@ -31,12 +31,12 @@ export default class Camera {
 		this.perspectiveCamera = new THREE.PerspectiveCamera(
 			70,
 			this.sizes.aspect,
-			0.01,
+			0.001,
 			1000
 		)
 		this.perspectiveCamera.position.x = 0
 		this.perspectiveCamera.position.y = 0
-		this.perspectiveCamera.position.z = 2
+		this.perspectiveCamera.position.z = 4
 
 		const helper = new THREE.CameraHelper(this.perspectiveCamera)
 		this.scene.add(helper)
