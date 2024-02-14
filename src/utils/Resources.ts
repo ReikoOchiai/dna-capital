@@ -5,6 +5,7 @@ import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { Font, FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 
+
 // config
 import { Asset } from '../constants/assets'
 
