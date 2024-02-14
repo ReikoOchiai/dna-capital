@@ -38,8 +38,8 @@ export default class Camera {
 		this.perspectiveCamera.position.y = 0
 		this.perspectiveCamera.position.z = 4
 
-		const helper = new THREE.CameraHelper(this.perspectiveCamera)
-		this.scene.add(helper)
+		// const helper = new THREE.CameraHelper(this.perspectiveCamera)
+		// this.scene.add(helper)
 		this.scene.add(this.perspectiveCamera)
 	}
 
